@@ -1,3 +1,7 @@
+# OS files
+.DS_Store
+
+# Django's Secret Key
 secrets.json 
 
 # Byte-compiled / optimized / DLL files
