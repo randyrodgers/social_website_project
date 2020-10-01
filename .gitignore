@@ -1,9 +1,6 @@
 # OS files
 .DS_Store
 
-# Django's Secret Key
-secrets.json 
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -66,6 +63,7 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+secrets.json 
 
 # Flask stuff:
 instance/
