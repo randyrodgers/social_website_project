@@ -137,16 +137,25 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join( BASE_DIR, 'media/' )
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
 ]
 
-# Facebook Authentication
+# Social Authentication
 with open( 'bookmarks/secrets.json', 'r' ) as secret_key_file:
     data = secret_key_file.read()
     obj = json.loads( data )
+    # Facebook
     SOCIAL_AUTH_FACEBOOK_KEY = str( obj[ 'FB_KEY' ] ) # Facebook App ID
     SOCIAL_AUTH_FACEBOOK_SECRET = str( obj[ 'FB_SECRET' ] ) # Facebook App Secret
+    # Twitter
+    SOCIAL_AUTH_TWITTER_KEY = str( obj[ 'TW_KEY' ] ) # Twitter API Key
+    SOCIAL_AUTH_TWITTER_SECRET = str( obj[ 'TW_SECRET' ] ) # Twitter API Secret
+    # Google
+    SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = str( obj[ 'GO_KEY' ] ) # Google Consumer Key
+    SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str( obj[ 'GO_SECRET' ] ) # Google Consumer Secret
     secret_key_file.close()
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
