@@ -1,6 +1,10 @@
 # OS files
 .DS_Store
 
+# Key and Certificate files
+*.key
+*.crt 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

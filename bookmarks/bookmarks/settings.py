@@ -30,12 +30,14 @@ with open( 'bookmarks/secrets.json', 'r' ) as secret_key_file:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [ 'mysite.com', 'localhost', '127.0.0.1' ]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'django_extensions',
+    'social_django',
     'account.apps.AccountConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -135,6 +137,16 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join( BASE_DIR, 'media/' )
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
 ]
+
+# Facebook Authentication
+with open( 'bookmarks/secrets.json', 'r' ) as secret_key_file:
+    data = secret_key_file.read()
+    obj = json.loads( data )
+    SOCIAL_AUTH_FACEBOOK_KEY = str( obj[ 'FB_KEY' ] ) # Facebook App ID
+    SOCIAL_AUTH_FACEBOOK_SECRET = str( obj[ 'FB_SECRET' ] ) # Facebook App Secret
+    secret_key_file.close()
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
