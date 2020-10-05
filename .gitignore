@@ -5,6 +5,12 @@
 *.key
 *.crt 
 
+# Image files
+*.jpg
+*.png
+*.bmp
+*.gif
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
