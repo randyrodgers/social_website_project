@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from django.urls import reverse_lazy
 from pathlib import Path
 import os, json 
 
@@ -138,6 +139,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join( BASE_DIR, 'media/' )
 
+
 AUTHENTICATION_BACKENDS = [
     'social_core.backends.google.GoogleOAuth2',
     'social_core.backends.twitter.TwitterOAuth',
@@ -161,3 +163,8 @@ with open( 'bookmarks/secrets.json', 'r' ) as secret_key_file:
     SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = str( obj[ 'GO_SECRET' ] ) # Google Consumer Secret
     secret_key_file.close()
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+
+
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user' : lambda u : reverse_lazy( 'user_detail', args = [u.username] )
+}
